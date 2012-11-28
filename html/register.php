@@ -32,7 +32,7 @@
         {
             apologize("You must provide a unique group key emailed to you by group creator!");
         }
-        else if (query("SELECT * FROM users WHERE groupkey=?", $_POST["groupkey"])===false)
+        else if ((query("SELECT * FROM users WHERE groupkey = ?", $_POST["groupkey"]))===false)
         {
             apologize("There is no such group key registered with our site!");
         }
@@ -47,7 +47,7 @@
         }
         else
         {
-            $rows = query("SELECT LAST_INSERT_ID() AS id");
+            $rows = //query("SELECT LAST_INSERT_ID() AS id");
             $id = $rows[0]["id"];
             // remember that user's now logged in by storing user's ID in session
             $_SESSION["id"] = $id;
