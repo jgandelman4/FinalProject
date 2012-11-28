@@ -16,7 +16,7 @@
             <input autofocus name="groupkey" placeholder="Your unique group key" type="text"/>
         </div>
         <div class="control-group">
-            <button type="submit" class="btn">Register</button>
+            <button type="submit" class="btn">Link with Group!</button>
         </div>
     </fieldset>
 </form>

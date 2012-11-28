@@ -40,8 +40,8 @@
         {
             apologize("Your passwords do not match!");
         }
-        else if ((query("INSERT INTO users (username, hash, cash) VALUES(?, ?, 100000.00)",
-        $_POST["username"], crypt($_POST["password"])))===false)
+        else if ((query("INSERT INTO users (username, hash, gmail, groupkey) VALUES(?, ?, ?, ?)",
+        $_POST["username"], crypt($_POST["password"]), $_POST["gmail"], $_POST["groupkey"]))===false)
         {
             apologize("We were not able to register you at this time...try again later!");
         }
