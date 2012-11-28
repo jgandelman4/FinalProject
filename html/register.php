@@ -5,7 +5,7 @@
      *
      * Computer Science 50
      * Problem Set 7
-     * Jason Gandelman
+     * Jason Gandelman, Charlotte Chang
      *
      * Calculates what will be displayed in register_form.php
      **********************************************************************/
