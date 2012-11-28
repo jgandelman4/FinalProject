@@ -32,6 +32,7 @@
         {
             apologize("You must provide a unique group key emailed to you by group creator!");
         }
+        // something wrong with this error checking! 
         else if ((query("SELECT * FROM users WHERE groupkey = ?", $_POST["groupkey"]))===false)
         {
             apologize("There is no such group key registered with our site!");
