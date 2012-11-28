@@ -35,6 +35,8 @@ $(".btn").click(function() {
 
 });
 
+</script>
+
 //success of first ajax will loop through all busy events of everyone and call ajax each time to create one event in master calendar
 
 //success of second ajax will call free/busy query on master calendar

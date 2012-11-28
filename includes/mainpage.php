@@ -14,6 +14,6 @@
     // configuration
     require("../includes/config.php");
 
-    render("register_form.php", ["title" => "Register"]);
+    render("register_form.php", ["title" => "MainPage"]);
 
 ?>
