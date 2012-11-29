@@ -1,6 +1,6 @@
 
 <script type="text/javascript">
-
+console.log(
 /***********************************************
 * Drop Down Date select script- by JavaScriptKit.com
 * This notice MUST stay intact for use
