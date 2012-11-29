@@ -48,7 +48,7 @@
         }
         else
         {
-            $rows = //query("SELECT LAST_INSERT_ID() AS id");
+            $rows = query("SELECT LAST_INSERT_ID() AS id");
             $id = $rows[0]["id"];
             // remember that user's now logged in by storing user's ID in session
             $_SESSION["id"] = $id;
