@@ -8,7 +8,8 @@
 ***********************************************/
 
 var monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
-
+//
+console.log(monthtext);
 function populatedropdown(dayfield, monthfield, yearfield){
 var today=new Date()
 var dayfield=document.getElementById(dayfield)
@@ -29,7 +30,7 @@ yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, 
 }
 </script>
 
-<table>
+<table style=>
 <tr>
 <form name="start">
 <td><select id="startdaydropdown"></select></td> 
@@ -62,10 +63,13 @@ populatedropdown("enddaydropdown", "endmonthdropdown", "endyeardropdown")
 }
 </script>
 
-
 <script>
 // format $start, $end by concatenation into RFC 3339 format 
-$start=date($("#start"));
+//JS does not have $! jQuery has $ - meaning selector
+var year = $("#startyeardropdown").val
+//define all of them here first...
+var start=date($("#start"));
+var datestring = year + "-" + month + "-"+
 
 $(document).ready(function() {
 
@@ -75,8 +79,8 @@ $(".btn").click(function() {
     url:'https://www.googleapis.com/calendar/v3/freeBusy?key={AIzaSyBwAfKa5glQIm_cTkPZKbjIAaiOUNHlIRE}',
     type:'POST',
     data: {
-    "timeMin":"2012-11-24T00:00:00+00:00"
-    "timeMax":"2012-11-25T00:00:00+00:00""
+    "timeMin":datestring,
+    "timeMax":"2012-11-25T00:00:00+00:00"",
     "timeZone":"EST" 
     "items": [
         {
@@ -84,24 +88,19 @@ $(".btn").click(function() {
         }
         ]   
     },
-    success:function(response){
+    success:function(response,textStatus,jqXHR){
     // Create an empty array to store times
-	var events = [];
-
+    var users = reponse["calendars"];
 	// Loop through the items
-	for(var key in response) 
+	var events = [];
+	var i = 0;
+	for(var user in users) 
     {
-         i=0;
-         events.starti=calendars.(key).busy[].start;
-         events.endi=calendars.(key).busy[].end;
-         i++;
-         
+        for (var time in users[user]) 
+        events[i]= users[user]["time"];
+        i++;
     }
-    
-    for (var key in events)
-    {
-        document.writeln('events[key]');
-    }
+    $.ajax//create new event
     
     //jquery read json 
     //loop through each key in json 
