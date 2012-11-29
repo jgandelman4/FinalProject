@@ -20,7 +20,7 @@
     // enable sessions
     session_start();
 
-    // require authentication for most pages
+    /* require authentication for most pages
     if (!preg_match("{(?:login|logout|register)\.php$}", $_SERVER["PHP_SELF"]))
     {
         if (empty($_SESSION["id"]))
@@ -28,5 +28,5 @@
             redirect("login.php");
         }
     }
-
+    */
 ?>
