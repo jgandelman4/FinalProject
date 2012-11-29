@@ -6,3 +6,11 @@
  *
  * Global JavaScript, if any.
  **********************************************************************/
+
+//think of this as a library..
+/**
+function newfunction(parameters)
+{
+    //codes here......
+}
+*/
