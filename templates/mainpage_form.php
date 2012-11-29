@@ -73,7 +73,7 @@ $(document).ready(function() {
 $(".btn").click(function() {
 
     $.ajax({
-    url:'https://www.googleapis.com/calendar/v3/freeBusy?key={AIzaSyBwAfKa5glQIm_cTkPZKbjIAaiOUNHlIRE}',
+    url:'https://www.googleapis.com/calendar/v3/freeBusy?key=AIzaSyAtbPQBk1DDAWgBAs07k3f7QKhtPa434-o',
     type:'POST',
     data: {
     "timeMin":"2012-11-24T00:00:00+00:00",
@@ -103,9 +103,8 @@ $(".btn").click(function() {
     }
     console.log(users);
     console.log(events);
-    
-    //create new event
-    
+
+//create new event with ajax request    
     //jquery read json 
     //loop through each key in json 
     //add each busy event to an array
@@ -114,8 +113,6 @@ $(".btn").click(function() {
 });
 });
 });
-
-
 
 </script>
 
