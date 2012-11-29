@@ -1,6 +1,6 @@
 
 <script type="text/javascript">
-console.log(
+
 /***********************************************
 * Drop Down Date select script- by JavaScriptKit.com
 * This notice MUST stay intact for use
@@ -79,14 +79,18 @@ $(".btn").click(function() {
     url:'https://www.googleapis.com/calendar/v3/freeBusy?key={AIzaSyBwAfKa5glQIm_cTkPZKbjIAaiOUNHlIRE}',
     type:'POST',
     data: {
-    "timeMin":datestring,
-    "timeMax":"2012-11-25T00:00:00+00:00"",
-    "timeZone":"EST" 
-    "items": [
+    "timeMin":"2012-11-24T00:00:00+00:00",
+    "timeMax":"2012-11-25T00:00:00+00:00",
+    "timeZone":"EST", 
+    "items":
+    [
         {
           "id": "jgandelman4@gmail.com"
+        },
+        {
+          "id": "shuaishuai333@gmail.com" 
         }
-        ]   
+    ]   
     },
     success:function(response,textStatus,jqXHR){
     // Create an empty array to store times
@@ -100,6 +104,9 @@ $(".btn").click(function() {
         events[i]= users[user]["time"];
         i++;
     }
+    console.log(users);
+    console.log(events);
+    
     $.ajax//create new event
     
     //jquery read json 
