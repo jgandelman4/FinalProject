@@ -8,8 +8,6 @@
 ***********************************************/
 
 var monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
-//
-console.log(monthtext);
 function populatedropdown(dayfield, monthfield, yearfield){
 var today=new Date()
 var dayfield=document.getElementById(dayfield)
@@ -68,8 +66,7 @@ populatedropdown("enddaydropdown", "endmonthdropdown", "endyeardropdown")
 //JS does not have $! jQuery has $ - meaning selector
 var year = $("#startyeardropdown").val
 //define all of them here first...
-var start=date($("#start"));
-var datestring = year + "-" + month + "-"+
+//var datestring = year + "-" + month + "-"+
 
 $(document).ready(function() {
 
@@ -107,18 +104,18 @@ $(".btn").click(function() {
     console.log(users);
     console.log(events);
     
-    $.ajax//create new event
+    //create new event
     
     //jquery read json 
     //loop through each key in json 
     //add each busy event to an array
     //call new JS function that sets off ajax!
     }
-    
-    
-    
-
 });
+});
+});
+
+
 
 </script>
 
