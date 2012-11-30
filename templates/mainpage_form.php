@@ -1,4 +1,4 @@
-
+<script src="https://apis.google.com/js/client.js?onload=load"></script>
 <script type="text/javascript">
 
 /***********************************************
