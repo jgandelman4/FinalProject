@@ -102,7 +102,7 @@ $(".btn").click(function() {
         events[i]= users[user]["time"];
         i++;
     }
-    console.log(users);
+    console.log(response);
     console.log(events);
 
 //create new event with ajax request    
