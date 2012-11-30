@@ -7,7 +7,7 @@
             <input name="password" placeholder="Group Password" type="password"/>
         </div>
         <div class="control-group">
-            <button type="submit" class="btn">Log In</button>
+            <button type="submit" class="btn">Log in to group page!</button>
         </div>
     </fieldset>
 </form>

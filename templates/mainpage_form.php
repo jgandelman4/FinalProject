@@ -28,7 +28,7 @@ yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, 
 }
 </script>
 
-<table styl>
+<table>
 <tr>
 <form name="start">
 <td><select id="startdaydropdown"></select></td> 
@@ -75,7 +75,8 @@ $(".btn").click(function() {
     $.ajax({
     url:'https://www.googleapis.com/calendar/v3/freeBusy?key=AIzaSyAtbPQBk1DDAWgBAs07k3f7QKhtPa434-o',
     type:'POST',
-    data: {
+    contentType: 'application/json',
+    data: JSON.stringify({
     "timeMin":"2012-11-24T00:00:00+00:00",
     "timeMax":"2012-11-25T00:00:00+00:00",
     "timeZone":"EST", 
@@ -88,10 +89,10 @@ $(".btn").click(function() {
           "id": "shuaishuai333@gmail.com" 
         }
     ]   
-    },
+    }),
     success:function(response,textStatus,jqXHR){
     // Create an empty array to store times
-    var users = reponse["calendars"];
+    var users = response["calendars"];
 	// Loop through the items
 	var events = [];
 	var i = 0;
