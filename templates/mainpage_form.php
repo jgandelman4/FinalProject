@@ -28,7 +28,7 @@ yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, 
 }
 </script>
 
-<table style=>
+<table styl>
 <tr>
 <form name="start">
 <td><select id="startdaydropdown"></select></td> 
