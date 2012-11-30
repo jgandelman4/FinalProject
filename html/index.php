@@ -14,7 +14,7 @@
     require("../includes/config.php"); 
     
     // if not logged in, then go to login page
-    if(empty($_SESSION["id"])) 
+    if(empty($_SESSION["member"])) 
     {
         // redirect to login
         redirect("/login.php");

@@ -1,10 +1,10 @@
 <form action="login.php" method="post">
     <fieldset>
         <div class="control-group">
-            <input autofocus name="username" placeholder="Username" type="text"/>
+            <input autofocus name="member" placeholder="Gmail Address" type="text"/>
         </div>
         <div class="control-group">
-            <input name="password" placeholder="Password" type="password"/>
+            <input name="password" placeholder="Group Password" type="password"/>
         </div>
         <div class="control-group">
             <button type="submit" class="btn">Log In</button>
@@ -12,5 +12,6 @@
     </fieldset>
 </form>
 <div>
-    or <a href="register.php">register</a> for an account
+    or <a href="registergroup.php">create</a> for a group
+    or <a href="register.php">join</a> a group
 </div>

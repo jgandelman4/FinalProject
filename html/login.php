@@ -7,37 +7,37 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
         // validate submission
-        if (empty($_POST["username"]))
+        if (empty($_POST["member"]))
         {
-            apologize("You must provide your username.");
+            apologize("You must provide your calendar.");
         }
         else if (empty($_POST["password"]))
         {
-            apologize("You must provide your password.");
+            apologize("You must provide your group password.");
         }
 
         // query database for user
-        $rows = query("SELECT * FROM users WHERE username = ?", $_POST["username"]);
-
+        $rows = query("SELECT * FROM groups WHERE member = ?", $_POST["member"]);
+        
         // if we found user, check password
         if (count($rows) == 1)
         {
-            // first (and only) row
+            // first (and only) member
             $row = $rows[0];
 
             // compare hash of user's input against hash that's in database
-            if (crypt($_POST["password"], $row["hash"]) == $row["hash"])
+            if ($_POST["password"] == $row["key"])
             {
                 // remember that user's now logged in by storing user's ID in session
-                $_SESSION["id"] = $row["id"];
+                $_SESSION["member"] = $row["member"];
 
-                // redirect to portfolio
-                redirect("/");
+                // redirect to main page
+                redirect("/mainpage.php");
             }
         }
 
         // else apologize
-        apologize("Invalid username and/or password.");
+        apologize("You have not joined this group.");
     }
     else
     {
