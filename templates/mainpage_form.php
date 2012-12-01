@@ -30,18 +30,18 @@ yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, 
 
 <table styl>
 <tr>
-<form name="start">
-<td><select id="startdaydropdown"></select></td> 
-<td><select id="startmonthdropdown"></select></td> 
-<td><select id="startyeardropdown"></select></td> 
+<form id="start">
+<td><select id="sday"></select></td> 
+<td><select id="smonth"></select></td> 
+<td><select id="syear"></select></td> 
 </form>
 </tr>
 
 <tr>
-<form name="end">
-<td><select id="enddaydropdown"></select></td> 
-<td><select id="endmonthdropdown"></select></td> 
-<td><select id="endyeardropdown"></select></td> 
+<form id="end">
+<td><select id="eday"></select></td> 
+<td><select id="emonth"></select></td> 
+<td><select id="eyear"></select></td> 
 </form>
 </tr>
 
@@ -56,17 +56,24 @@ yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, 
 
 //populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
 window.onload=function(){
-populatedropdown("startdaydropdown", "startmonthdropdown", "startyeardropdown")
-populatedropdown("enddaydropdown", "endmonthdropdown", "endyeardropdown")
+populatedropdown("sday", "smonth", "syear")
+populatedropdown("eday", "emonth", "eyear")
 }
 </script>
 
 <script>
 // format $start, $end by concatenation into RFC 3339 format 
-//JS does not have $! jQuery has $ - meaning selector
-var year = $("#startyeardropdown").val
-//define all of them here first...
-//var datestring = year + "-" + month + "-"+
+var sday= $("#start : select[id='sday']");
+var smonth = $("#smonth").val();
+var syear = $("#syear").val();
+var eday = $("#eday").val;
+var emonth = $("#emonth").val;
+var eyear = $("#eyear").val;
+var sdatestring = syear + "-" + smonth + "-"+ sday+"T00:00:00-05:00";
+var edatestring = eyear + "-" + emonth + "-"+ eday+"T00:00:00-05:00";
+console.log(sday);
+console.log(sdatestring);
+//console.log(edatestring);
 
 $(document).ready(function() {
 
@@ -77,9 +84,9 @@ $(".btn").click(function() {
     type:'POST',
     contentType: 'application/json',
     data: JSON.stringify({
-    "timeMin":"2012-11-24T00:00:00+00:00",
-    "timeMax":"2012-11-25T00:00:00+00:00",
-    "timeZone":"EST", 
+    "timeMin": sdatestring,
+    "timeMax": edatestring,
+    //"timeZone":"EST", 
     "items":
     [
         {
@@ -90,19 +97,18 @@ $(".btn").click(function() {
         }
     ]   
     }),
-    success:function(response,textStatus,jqXHR){
+    success:function(response, textStatus, jqXHR){
     //Create an empty array to store times
-    var users = reponse["calendars"];
+    var users = response["calendars"];
 	//Loop through the items
 	var events = [];
 	var i = 0;
 	for(var user in users) 
     {
-        for (var time in users[user]) 
-        events[i]= users[user]["time"];
+        for (var busy in users[user]) 
+        events[i]= users[user]["busy"];
         i++;
     }
-    console.log(response);
     console.log(events);
 
 //create new event with ajax request    
