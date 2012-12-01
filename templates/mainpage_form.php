@@ -28,7 +28,7 @@ yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, 
 }
 </script>
 
-<table styl>
+<table>
 <tr>
 <form id="start">
 <td><select id="sday"></select></td> 
@@ -97,19 +97,22 @@ $(".btn").click(function() {
         }
     ]   
     }),
-    success:function(response, textStatus, jqXHR){
-    //Create an empty array to store times
+
+    success:function(response,textStatus,jqXHR){
+    // Create an empty array to store times
     var users = response["calendars"];
-	//Loop through the items
+	// Loop through the items
 	var events = [];
 	var i = 0;
 	for(var user in users) 
-    {
-        for (var busy in users[user]) 
+    {   
+        for (var time in users[user]) 
         events[i]= users[user]["busy"];
         i++;
     }
     console.log(events);
+    
+
 
 //create new event with ajax request    
     //jquery read json 
