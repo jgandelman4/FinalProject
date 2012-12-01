@@ -64,7 +64,8 @@ populatedropdown("enddaydropdown", "endmonthdropdown", "endyeardropdown")
 <script>
 // format $start, $end by concatenation into RFC 3339 format 
 //JS does not have $! jQuery has $ - meaning selector
-var year = $("#startyeardropdown").val
+var year = $("#startyeardropdown")
+console.log(year);
 //define all of them here first...
 //var datestring = year + "-" + month + "-"+
 
