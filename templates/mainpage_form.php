@@ -1,4 +1,3 @@
-<script src="https://apis.google.com/js/client.js?onload=load"></script>
 <script type="text/javascript">
 
 /***********************************************
@@ -63,17 +62,22 @@ populatedropdown("eday", "emonth", "eyear")
 
 <script>
 // format $start, $end by concatenation into RFC 3339 format 
-var sday= $('select#sday option:selected').val();
-var smonth = $('#smonth').val();
+//JS does not have $! jQuery has $ - meaning selector
+
+//define all of them here first...
+//var datestring = year + "-" + month + "-"+
+
+var sday= $("#sday").val();
+console.log(sday);
+var smonth = $("#smonth").val();
 var syear = $("#syear").val();
 var eday = $("#eday").val;
 var emonth = $("#emonth").val;
 var eyear = $("#eyear").val;
 var sdatestring = syear + "-" + smonth + "-"+ sday+"T00:00:00-05:00";
 var edatestring = eyear + "-" + emonth + "-"+ eday+"T00:00:00-05:00";
-console.log(sday);
-console.log(sdatestring);
-//console.log(edatestring);
+
+console.log(<?php $members ?>);
 
 $(document).ready(function() {
 
@@ -84,12 +88,13 @@ $(".btn").click(function() {
     type:'POST',
     contentType: 'application/json',
     data: JSON.stringify({
-    "timeMin": sdatestring,
-    "timeMax": edatestring,
+    "timeMin": '2012-11-29T00:00:00-05:00',
+    "timeMax": '2012-12-01T00:00:00-05:00',
     //"timeZone":"EST", 
     "items":
     [
         {
+          //we will loop to populate this        
           "id": "jgandelman4@gmail.com"
         },
         {
@@ -107,6 +112,7 @@ $(".btn").click(function() {
 	for(var user in users) 
     {   
         for (var time in users[user]) 
+        //these are all busy times stored in sequence of user calendar
         events[i]= users[user]["busy"];
         i++;
     }
