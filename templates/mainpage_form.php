@@ -99,11 +99,10 @@ $(".btn").click(function() {
 	for(var user in users) 
     {
         for (var time in users[user]) 
-        events[i]= users[user]["time"];
+        events[i]= users[user]["busy"];
         i++;
     }
-    console.log(response);
-    console.log(events);
+    
 
 //create new event with ajax request    
     //jquery read json 
