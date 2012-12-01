@@ -29,7 +29,7 @@
             if ($_POST["password"] == $row["key"])
             {
                 // remember that user's now logged in by storing user's ID in session
-                $_SESSION["member"] = $row["member"];
+                $_SESSION["key"] = $row["key"];
 
                 // redirect to main page
                 redirect("/mainpage.php");

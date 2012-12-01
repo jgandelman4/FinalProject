@@ -63,8 +63,8 @@ populatedropdown("eday", "emonth", "eyear")
 
 <script>
 // format $start, $end by concatenation into RFC 3339 format 
-var sday= $("#start : select[id='sday']");
-var smonth = $("#smonth").val();
+var sday= $('select#sday option:selected').val();
+var smonth = $('#smonth').val();
 var syear = $("#syear").val();
 var eday = $("#eday").val;
 var emonth = $("#emonth").val;
