@@ -30,8 +30,8 @@
             {
                 // remember that user's now logged in by storing user's ID in session
                 $_SESSION["key"] = $row["key"];
-
-                // redirect to main page
+                
+                //redirect to main page
                 redirect("/mainpage.php");
             }
         }

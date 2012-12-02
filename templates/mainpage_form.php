@@ -68,7 +68,7 @@ populatedropdown("eday", "emonth", "eyear")
 //var datestring = year + "-" + month + "-"+
 
 var sday= $("#sday").val();
-console.log(sday);
+//console.log(sday);
 var smonth = $("#smonth").val();
 var syear = $("#syear").val();
 var eday = $("#eday").val;
@@ -76,8 +76,7 @@ var emonth = $("#emonth").val;
 var eyear = $("#eyear").val;
 var sdatestring = syear + "-" + smonth + "-"+ sday+"T00:00:00-05:00";
 var edatestring = eyear + "-" + emonth + "-"+ eday+"T00:00:00-05:00";
-
-console.log(<?php $members ?>);
+console.log(members);
 
 $(document).ready(function() {
 
@@ -94,7 +93,10 @@ $(".btn").click(function() {
     "items":
     [
         {
-          //we will loop to populate this        
+          //we will loop to through members with js
+          /**for (var member in members)
+          echo"{id:"INSERT HERE"}"
+          */        
           "id": "jgandelman4@gmail.com"
         },
         {
@@ -117,9 +119,12 @@ $(".btn").click(function() {
         i++;
     }
     console.log(events);
-    
-
-
+ 
+    $.ajax{
+    //now we will have all busy times in events, all users in users
+    //insert all events into the master calendar
+     
+     }
 //create new event with ajax request    
     //jquery read json 
     //loop through each key in json 
@@ -127,6 +132,8 @@ $(".btn").click(function() {
     //call new JS function that sets off ajax!
     }
 });
+
+
 });
 });
 
