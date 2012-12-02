@@ -1,5 +1,8 @@
-<script type="text/javascript">
 
+
+<script type="text/javascript">
+var jstext = "<?= $phptext ?>";
+console.log(jstext);
 /***********************************************
 * Drop Down Date select script- by JavaScriptKit.com
 * This notice MUST stay intact for use
@@ -53,7 +56,7 @@ yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, 
 
 <script type="text/javascript">
 
-//populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
+// populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
 window.onload=function(){
 populatedropdown("sday", "smonth", "syear")
 populatedropdown("eday", "emonth", "eyear")
@@ -65,10 +68,9 @@ populatedropdown("eday", "emonth", "eyear")
 //JS does not have $! jQuery has $ - meaning selector
 
 //define all of them here first...
-//var datestring = year + "-" + month + "-"+
 
 var sday= $("#sday").val();
-//console.log(sday);
+
 var smonth = $("#smonth").val();
 var syear = $("#syear").val();
 var eday = $("#eday").val;
@@ -76,7 +78,8 @@ var emonth = $("#emonth").val;
 var eyear = $("#eyear").val;
 var sdatestring = syear + "-" + smonth + "-"+ sday+"T00:00:00-05:00";
 var edatestring = eyear + "-" + emonth + "-"+ eday+"T00:00:00-05:00";
-console.log(members);
+console.log(sday);
+
 
 $(document).ready(function() {
 
@@ -120,11 +123,11 @@ $(".btn").click(function() {
     }
     console.log(events);
  
-    $.ajax{
+    //$.ajax{
     //now we will have all busy times in events, all users in users
     //insert all events into the master calendar
      
-     }
+    //}
 //create new event with ajax request    
     //jquery read json 
     //loop through each key in json 
