@@ -1,5 +1,4 @@
 <script type="text/javascript">
-
 /***********************************************
 * Drop Down Date select script- by JavaScriptKit.com
 * This notice MUST stay intact for use
@@ -79,7 +78,7 @@ $(document).ready(function() {
                 "id": members[i]
             };
         }
-        //console.log(calendar_ids);
+        console.log(calendar_ids);
         
         //now send first free busy ajax request to Google Calendar API
         $.ajax({
@@ -107,7 +106,7 @@ $(document).ready(function() {
             i++;
         }
         console.log(events);
-     
+        
         //$.ajax{
         //now we will have all busy times in events, all users in users
         //insert all events into the master calendar
@@ -117,14 +116,11 @@ $(document).ready(function() {
         //jquery read json 
         //loop through each key in json 
         //add each busy event to an array
-        //call new JS function that sets off ajax!
-    }
-});
-
-
+        //call new JS function that sets off ajax!   
+        }
 });
 });
-
+})
 </script>
 
 //success of first ajax will loop through all busy events of everyone and call ajax each time to create one event in master calendar

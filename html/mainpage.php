@@ -11,13 +11,13 @@
 
     // configuration
     require("../includes/config.php");
-    // sql query in user database for gmails where group key = person logged in's group key
     //NOTE:"key" is special word in php, so 'key'
     $members = query("SELECT member FROM groups WHERE `key` = ?", $_SESSION["key"]);
     if($members == false)
     {
         apologize("Failed to retrieve group information!");
     }
+
     //create local array to store just the "member" column from query, which returns an array of rows!
     $memberslist = [];
     foreach($members as $member)
