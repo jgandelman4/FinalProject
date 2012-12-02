@@ -5,7 +5,6 @@
 * This notice MUST stay intact for use
 * Visit JavaScript Kit at http://www.javascriptkit.com/ for this script and more
 ***********************************************/
-
 var monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
 function populatedropdown(dayfield, monthfield, yearfield){
 var today=new Date()
@@ -45,91 +44,80 @@ yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, 
 </tr>
 
 <tr>
-<button type="submit" class="btn">Search Dates</button>
+<button type="submit" class="submit_date">Search Dates</button>
 </tr>
-
 </table>
 
-
 <script type="text/javascript">
-
 //populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
 window.onload=function(){
 populatedropdown("sday", "smonth", "syear")
 populatedropdown("eday", "emonth", "eyear")
 }
 </script>
-
 <script>
-// format $start, $end by concatenation into RFC 3339 format 
-//JS does not have $! jQuery has $ - meaning selector
-
-//define all of them here first...
-//var datestring = year + "-" + month + "-"+
-
-var sday= $("#sday").val();
-//console.log(sday);
-var smonth = $("#smonth").val();
-var syear = $("#syear").val();
-var eday = $("#eday").val;
-var emonth = $("#emonth").val;
-var eyear = $("#eyear").val;
-var sdatestring = syear + "-" + smonth + "-"+ sday+"T00:00:00-05:00";
-var edatestring = eyear + "-" + emonth + "-"+ eday+"T00:00:00-05:00";
-console.log(members);
-
 $(document).ready(function() {
+    //make js understand the php variable passed in from controller
+    var members = <?php echo json_encode($members); ?>;
 
-$(".btn").click(function() {
-
-    $.ajax({
-    url:'https://www.googleapis.com/calendar/v3/freeBusy?key=AIzaSyAtbPQBk1DDAWgBAs07k3f7QKhtPa434-o',
-    type:'POST',
-    contentType: 'application/json',
-    data: JSON.stringify({
-    "timeMin": '2012-11-29T00:00:00-05:00',
-    "timeMax": '2012-12-01T00:00:00-05:00',
-    //"timeZone":"EST", 
-    "items":
-    [
+    $("submit_date").click(function() {
+        //read information from dropdown here, because DOM is not loaded previously
+        var sday= $("#sday").val();
+        var smonth = $("#smonth").val();
+        var syear = $("#syear").val();
+        var eday = $("#eday").val();
+        var emonth = $("#emonth").val();
+        var eyear = $("#eyear").val();
+        var sdatestring = syear + "-" + smonth + "-"+ sday+"T00:00:00-05:00";
+        var edatestring = eyear + "-" + emonth + "-"+ eday+"T00:00:00-05:00";
+        //now build object containing ids to send in ajax
+        var calendar_ids = [];
+        //i here is the key, automatically increments
+        for (i in members)
         {
-          //we will loop to through members with js
-          /**for (var member in members)
-          echo"{id:"INSERT HERE"}"
-          */        
-          "id": "jgandelman4@gmail.com"
-        },
-        {
-          "id": "shuaishuai333@gmail.com" 
+            calendar_ids[i] = {
+                "id": members[i]
+            };
         }
-    ]   
-    }),
+        //console.log(calendar_ids);
+        
+        //now send first free busy ajax request to Google Calendar API
+        $.ajax({
+            url:'https://www.googleapis.com/calendar/v3/freeBusy?key=AIzaSyAtbPQBk1DDAWgBAs07k3f7QKhtPa434-o',
+            type:'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+            "timeMin": sdatestring,
+            "timeMax": edatestring,
+            "timeZone":"EST",
+            //send object of ids 
+            "items": calendar_ids
+        }),
 
-    success:function(response,textStatus,jqXHR){
-    // Create an empty array to store times
-    var users = response["calendars"];
-	// Loop through the items
-	var events = [];
-	var i = 0;
-	for(var user in users) 
-    {   
-        for (var time in users[user]) 
-        //these are all busy times stored in sequence of user calendar
-        events[i]= users[user]["busy"];
-        i++;
-    }
-    console.log(events);
- 
-    $.ajax{
-    //now we will have all busy times in events, all users in users
-    //insert all events into the master calendar
+        success:function(response,textStatus,jqXHR){
+        // Create an empty array to store times
+        var users = response["calendars"];
+	    var events = [];
+	    var i = 0;
+	    for(var user in users) 
+        {   
+            for (var time in users[user]) 
+            //these are all busy times stored in sequence of user calendar
+            events[i]= users[user]["busy"];
+            i++;
+        }
+        console.log(events);
      
-     }
-//create new event with ajax request    
-    //jquery read json 
-    //loop through each key in json 
-    //add each busy event to an array
-    //call new JS function that sets off ajax!
+        //$.ajax{
+        //now we will have all busy times in events, all users in users
+        //insert all events into the master calendar
+         
+        //}
+        //create new event with ajax request    
+        //jquery read json 
+        //loop through each key in json 
+        //add each busy event to an array
+        //call new JS function that sets off ajax!
     }
 });
 

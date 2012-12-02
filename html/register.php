@@ -32,7 +32,6 @@
         {
             apologize("You must provide a unique group key emailed to you by group creator!");
         }
-        // something wrong with this error checking! 
         else if ((query("SELECT * FROM users WHERE groupkey = ?", $_POST["groupkey"]))==false)
         {
             apologize("There is no such group key registered with our site!");
@@ -41,7 +40,7 @@
         {
             apologize("Your passwords do not match!");
         }
-        else if ((query("INSERT INTO users (username, hash, gmail, groupkey) VALUES(?, ?, ?, ?)",
+        else if ((query("INSERT INTO groups name =?, 'key'=?, member =?", $_POST[""],
         $_POST["username"], crypt($_POST["password"]), $_POST["gmail"], $_POST["groupkey"]))===false)
         {
             apologize("We were not able to register you at this time...try again later!");
