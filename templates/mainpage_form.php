@@ -4,7 +4,7 @@
 * This notice MUST stay intact for use
 * Visit JavaScript Kit at http://www.javascriptkit.com/ for this script and more
 ***********************************************/
-var monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+//var monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
 function populatedropdown(dayfield, monthfield, yearfield){
 var today=new Date()
 var dayfield=document.getElementById(dayfield)
@@ -13,9 +13,11 @@ var yearfield=document.getElementById(yearfield)
 for (var i=1; i<32; i++)
 dayfield.options[i]=new Option(i, i+1)
 dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
-for (var m=0; m<12; m++)
-monthfield.options[m]=new Option(monthtext[m], monthtext[m])
-monthfield.options[today.getMonth()]=new Option(monthtext[today.getMonth()], monthtext[today.getMonth()], true, true) //select today's month
+for (var m=1; m<13; m++)
+//monthfield.options[m]=new Option(monthtext[m], monthtext[m])
+monthfield.options[m]=new Option(m,m+1)
+//monthfield.options[today.getMonth()]=new Option(monthtext[today.getMonth()], monthtext[today.getMonth()], true, true) //select today's month
+monthfield.options[today.getMonth()]=new Option(today.getMonth(), today.getMonth(), true, true) //select today's month
 var thisyear=today.getFullYear()
 for (var y=0; y<20; y++){
 yearfield.options[y]=new Option(thisyear, thisyear)
@@ -43,7 +45,7 @@ yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, 
 </tr>
 
 <tr>
-<button type="submit" class="submit_date">Search Dates</button>
+<button type="submit" class="search_date">Search Dates</button>
 </tr>
 </table>
 
@@ -54,12 +56,12 @@ populatedropdown("sday", "smonth", "syear")
 populatedropdown("eday", "emonth", "eyear")
 }
 </script>
+
 <script>
 $(document).ready(function() {
     //make js understand the php variable passed in from controller
     var members = <?php echo json_encode($members); ?>;
-
-    $("submit_date").click(function() {
+    $('.search_date').click(function() {
         //read information from dropdown here, because DOM is not loaded previously
         var sday= $("#sday").val();
         var smonth = $("#smonth").val();
@@ -69,6 +71,8 @@ $(document).ready(function() {
         var eyear = $("#eyear").val();
         var sdatestring = syear + "-" + smonth + "-"+ sday+"T00:00:00-05:00";
         var edatestring = eyear + "-" + emonth + "-"+ eday+"T00:00:00-05:00";
+        console.log(sday);
+        console.log(sdatestring);
         //now build object containing ids to send in ajax
         var calendar_ids = [];
         //i here is the key, automatically increments
