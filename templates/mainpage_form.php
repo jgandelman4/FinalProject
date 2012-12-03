@@ -61,6 +61,7 @@ populatedropdown("eday", "emonth", "eyear")
 $(document).ready(function() {
     //make js understand the php variable passed in from controller
     var members = <?php echo json_encode($members); ?>;
+    
     $('.search_date').click(function() {
         //read information from dropdown here, because DOM is not loaded previously
         var sday= $("#sday").val();
@@ -113,7 +114,7 @@ $(document).ready(function() {
         
         //$.ajax{
         //now we will have all busy times in events, all users in users
-        //insert all events into the master calendar
+        //insert all events into the master calendar[skip the empty arrays]
          
         //}
         //create new event with ajax request    
