@@ -88,10 +88,7 @@ $(document).ready(function() {
             calendar_ids[i] = {
                 "id": members[i]
             };
-        }
-        console.log(calendar_ids);
-        
-        //now send first free busy ajax request to Google Calendar API
+        }        
         $.ajax({
             url:'https://www.googleapis.com/calendar/v3/freeBusy?key=AIzaSyAtbPQBk1DDAWgBAs07k3f7QKhtPa434-o',
             type:'POST',
@@ -117,32 +114,39 @@ $(document).ready(function() {
             i++;
         }
         console.log(events);
+        //now add all events to mastercalendar
+        var mastercalendar = <?php echo json_encode($mastercalendar); ?>;
+        console.log(mastercalendar);
         
-        /*$.ajax{{
-        //now we will have all busy times in events, all users in users
-        //insert all events into the master calendar[skip the empty arrays]
-        //create new event with ajax request    
-        //jquery read json 
-        //loop through each key in json 
-        //add each busy event to an array
-        //call new JS function that sets off ajax!
+        //create event for each event...stored as an object?
+        for(var event in events)
+        {   
+            //TODO still need to go one more layer down to objects!
+            //TODO figure out authorization stuff
+            if(event!== '')
+            {
+                var j = 0;
+                var endtime = events[j]["end"];
+                var starttime = events[j]["start"];
+                j++;
+                $.ajax({            
+                    url:'https://www.googleapis.com/calendar/v3/calendars/'+'mastercalendar'+'/events?key=AIzaSyCFj15TpkchL4OUhLD1Q2zgxQnMb7v3XaM',
+                    type:'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        "end": 
+                      {
+                        "dateTime": endtime
+                      },
+                        "start": 
+                      {
+                        "dateTime": starttime
+                      }
+                    }),
+                });
+            }
+        }
         
-        for each stored event
-           
-            
-            url:'https://www.googleapis.com/calendar/v3/freeBusy?key=AIzaSyAtbPQBk1DDAWgBAs07k3f7QKhtPa434-o',
-            type:'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({
-            "timeMin": sdatestring,
-            "timeMax": edatestring,
-            "timeZone":"EST",
-            //send object of ids 
-            "items": calendar_ids
-        }
-
-        }
-        */
         }
 });
 });
