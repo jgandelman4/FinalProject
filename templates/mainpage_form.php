@@ -6,18 +6,18 @@
 ***********************************************/
 //var monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
 function populatedropdown(dayfield, monthfield, yearfield){
-var today=new Date()
+var today=new Date()//2017, 3, 14, 0, 0, 0, 0)
 var dayfield=document.getElementById(dayfield)
 var monthfield=document.getElementById(monthfield)
 var yearfield=document.getElementById(yearfield)
 for (var i=1; i<32; i++)
-dayfield.options[i]=new Option(i, i+1)
+dayfield.options[i]=new Option(i)
 dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
 for (var m=1; m<13; m++)
 //monthfield.options[m]=new Option(monthtext[m], monthtext[m])
-monthfield.options[m]=new Option(m,m+1)
+monthfield.options[m]=new Option(m)
 //monthfield.options[today.getMonth()]=new Option(monthtext[today.getMonth()], monthtext[today.getMonth()], true, true) //select today's month
-monthfield.options[today.getMonth()]=new Option(today.getMonth(), today.getMonth(), true, true) //select today's month
+//monthfield.options[today.getMonth()]=new Option(today.getMonth(), today.getMonth(), true, true) //select today's month
 var thisyear=today.getFullYear()
 for (var y=0; y<20; y++){
 yearfield.options[y]=new Option(thisyear, thisyear)
@@ -58,22 +58,28 @@ populatedropdown("eday", "emonth", "eyear")
 </script>
 
 <script>
+//function to zero pad dates
+function zeroPad(num, places) {
+    var zero = places - num.toString().length + 1;
+    return Array(+(zero > 0 && zero)).join("0") + num;
+}
+
 $(document).ready(function() {
     //make js understand the php variable passed in from controller
     var members = <?php echo json_encode($members); ?>;
     
     $('.search_date').click(function() {
         //read information from dropdown here, because DOM is not loaded previously
-        var sday= $("#sday").val();
-        var smonth = $("#smonth").val();
+        var sday= zeroPad($("#sday").val(),2);
+        var smonth = zeroPad($("#smonth").val(),2);
         var syear = $("#syear").val();
-        var eday = $("#eday").val();
-        var emonth = $("#emonth").val();
+        var eday = zeroPad($("#eday").val(),2);
+        var emonth = zeroPad($("#emonth").val(),2);
         var eyear = $("#eyear").val();
         var sdatestring = syear + "-" + smonth + "-"+ sday+"T00:00:00-05:00";
         var edatestring = eyear + "-" + emonth + "-"+ eday+"T00:00:00-05:00";
-        console.log(sday);
         console.log(sdatestring);
+        console.log(edatestring);
         //now build object containing ids to send in ajax
         var calendar_ids = [];
         //i here is the key, automatically increments
@@ -112,16 +118,31 @@ $(document).ready(function() {
         }
         console.log(events);
         
-        //$.ajax{
+        /*$.ajax{{
         //now we will have all busy times in events, all users in users
         //insert all events into the master calendar[skip the empty arrays]
-         
-        //}
         //create new event with ajax request    
         //jquery read json 
         //loop through each key in json 
         //add each busy event to an array
-        //call new JS function that sets off ajax!   
+        //call new JS function that sets off ajax!
+        
+        for each stored event
+           
+            
+            url:'https://www.googleapis.com/calendar/v3/freeBusy?key=AIzaSyAtbPQBk1DDAWgBAs07k3f7QKhtPa434-o',
+            type:'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+            "timeMin": sdatestring,
+            "timeMax": edatestring,
+            "timeZone":"EST",
+            //send object of ids 
+            "items": calendar_ids
+        }
+
+        }
+        */
         }
 });
 });
