@@ -67,6 +67,7 @@ function zeroPad(num, places) {
 $(document).ready(function() {
     //make js understand the php variable passed in from controller
     var members = <?php echo json_encode($members); ?>;
+    console.log(members);
     
     $('.search_date').click(function() {
         //read information from dropdown here, because DOM is not loaded previously

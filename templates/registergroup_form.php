@@ -1,19 +1,16 @@
 <form action="registergroup.php" method="post">
     <fieldset>
         <div class="control-group">
-            <input autofocus name="username" placeholder="Username" type="text"/>
+            <input autofocus name="gmail" placeholder="Gmail address associated with your personal Gcal" type="text"/>
         </div>
         <div class="control-group">
-            <input name="password" placeholder="Password" type="password"/>
+            <input autofocus name="groupname" placeholder="Your group name" type="text"/>
         </div>
         <div class="control-group">
-            <input name="confirmation" placeholder="Confirm Password" type="password"/>
+            <input autofocus name="groupkey" placeholder="Your unique group key" type="password"/>
         </div>
         <div class="control-group">
-            <input autofocus name="gmail" placeholder="Gmail address associated with your Gcal" type="text"/>
-        </div>
-        <div class="control-group">
-            <input autofocus name="groupkey" placeholder="Your unique group key" type="text"/>
+            <input autofocus name="groupcalendar" placeholder="Your group calendar ID" type="text"/>
         </div>
         <div class="control-group">
             <button type="submit" class="btn">Create Group!</button>

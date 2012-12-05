@@ -13,7 +13,7 @@
         }
         else if (empty($_POST["password"]))
         {
-            apologize("You must provide your group password.");
+            apologize("You must provide your groupkey.");
         }
 
         // query database for user
@@ -26,10 +26,10 @@
             $row = $rows[0];
 
             // compare hash of user's input against hash that's in database
-            if ($_POST["password"] == $row["key"])
+            if ($_POST["password"] === $row["groupkey"])
             {
                 // remember that user's now logged in by storing user's ID in session
-                $_SESSION["key"] = $row["key"];
+                $_SESSION["groupkey"] = $row["groupkey"];
                 
                 //redirect to main page
                 redirect("/mainpage.php");

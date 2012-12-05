@@ -12,9 +12,9 @@
     // configuration
     require("../includes/config.php");
     //NOTE:"key" is special word in php, so 'key'
-    $members = query("SELECT member FROM groups WHERE `key` = ?", $_SESSION["key"]);
+    $members = query("SELECT member FROM groups WHERE `groupkey` = ?", $_SESSION["groupkey"]);
     //assuming we have a masterid column in SQL table
-    $mastercalendar = query ("SELECT masterid FROM groups WHERE `key` =?", $_SESSION["key"]);
+    $mastercalendar = query ("SELECT masterid FROM groups WHERE `groupkey` =?", $_SESSION["groupkey"]);
     if($members == false || $mastercalendar == false)
     {
         apologize("Failed to retrieve group information!");

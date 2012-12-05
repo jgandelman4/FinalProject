@@ -16,15 +16,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
         // validate submission
-        if (empty($_POST["username"]))
-        {
-            apologize("You must provide your username!");
-        }
-        else if (empty($_POST["password"]))
-        {
-            apologize("You must provide your password!");
-        }
-        else if (empty($_POST["gmail"]))
+        if (empty($_POST["gmail"]))
         {
             apologize("You must provide your gmail!");
         }
@@ -32,28 +24,20 @@
         {
             apologize("You must provide a unique group key emailed to you by group creator!");
         }
-        else if ((query("SELECT * FROM users WHERE groupkey = ?", $_POST["groupkey"]))==false)
+        else if (query("SELECT * FROM groups WHERE groupkey = ?", $_POST["groupkey"])==false)
         {
             apologize("There is no such group key registered with our site!");
         }
-        else if ($_POST["password"]!= $_POST["confirmation"])
-        {
-            apologize("Your passwords do not match!");
-        }
-        else if ((query("INSERT INTO groups name =?, 'key'=?, member =?", $_POST[""],
-        $_POST["username"], crypt($_POST["password"]), $_POST["gmail"], $_POST["groupkey"]))===false)
+        else if ((query("INSERT INTO groups (member, `groupkey`) VALUES (?,?)", $_POST["gmail"], $_POST["groupkey"]))===false)
         {
             apologize("We were not able to register you at this time...try again later!");
         }
+        
         else
         {
-            $rows = query("SELECT LAST_INSERT_ID() AS id");
-            $id = $rows[0]["id"];
-            // remember that user's now logged in by storing user's ID in session
-            $_SESSION["id"] = $id;
-
-            // redirect to portfolio
-            redirect("/");
+            $_SESSION["groupkey"] = $_POST["groupkey"];
+            // redirect to mainpage
+            redirect("/mainpage.php");
         }    
     }
     else
