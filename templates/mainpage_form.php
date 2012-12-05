@@ -117,18 +117,19 @@ $(document).ready(function() {
         console.log(events);
         //now add all events to mastercalendar
         var mastercalendar = <?php echo json_encode($mastercalendar); ?>;
-        console.log(mastercalendar);
         
         //create event for each event...stored as an object?
-        for(var event in events)
+        for(var calendar in events)
         {   
+            console.log(calendar);
             //TODO still need to go one more layer down to objects!
             //TODO figure out authorization stuff
-            if(event!== '')
+            for (var event in calendar)
             {
+            console.log(event);
                 var j = 0;
-                var endtime = events[j]["end"];
-                var starttime = events[j]["start"];
+                var endtime = event["end"];
+                var starttime = event["start"];
                 j++;
                 $.ajax({            
                     url:'https://www.googleapis.com/calendar/v3/calendars/'+'mastercalendar'+'/events?key=AIzaSyCFj15TpkchL4OUhLD1Q2zgxQnMb7v3XaM',
