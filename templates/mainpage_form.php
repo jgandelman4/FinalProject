@@ -79,8 +79,7 @@ $(document).ready(function() {
         var eyear = $("#eyear").val();
         var sdatestring = syear + "-" + smonth + "-"+ sday+"T00:00:00-05:00";
         var edatestring = eyear + "-" + emonth + "-"+ eday+"T00:00:00-05:00";
-        console.log(sdatestring);
-        console.log(edatestring);
+
         //now build object containing ids to send in ajax
         var calendar_ids = [];
         //i here is the key, automatically increments
@@ -89,7 +88,8 @@ $(document).ready(function() {
             calendar_ids[i] = {
                 "id": members[i]
             };
-        }        
+        } 
+        //send ajax request to call freebusy on all member calendars       
         $.ajax({
             url:'https://www.googleapis.com/calendar/v3/freeBusy?key=AIzaSyAtbPQBk1DDAWgBAs07k3f7QKhtPa434-o',
             type:'POST',
@@ -117,42 +117,98 @@ $(document).ready(function() {
         console.log(events);
         //now add all events to mastercalendar
         var mastercalendar = <?php echo json_encode($mastercalendar); ?>;
-        
+         /**
         //create event for each event...stored as an object?
         for(var calendar in events)
         {   
             console.log(calendar);
             //TODO still need to go one more layer down to objects!
             //TODO figure out authorization stuff
-            for (var event in calendar)
+            for (var event in [events][calendar])
             {
             console.log(event);
-                var j = 0;
-                var endtime = event["end"];
-                var starttime = event["start"];
-                j++;
-                $.ajax({            
-                    url:'https://www.googleapis.com/calendar/v3/calendars/'+'mastercalendar'+'/events?key=AIzaSyCFj15TpkchL4OUhLD1Q2zgxQnMb7v3XaM',
-                    type:'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        "end": 
-                      {
-                        "dateTime": endtime
-                      },
-                        "start": 
-                      {
-                        "dateTime": starttime
-                      }
-                    }),
-                });
-            }
-        }
+                if (event != '')
+                {
+                    var j = 0;
+                    var endtime = [events][event][calendar]["end"];
+                    console.log (endtime);
+                    var starttime = [events][event][calendar]["start"];
+                    j++;
+                    
+                   
+                    //TODO: https://www.googleapis.com/auth/calendar
+                    $.ajax({            
+                        url:'https://www.googleapis.com/calendar/v3/calendars/'+'mastercalendar'+'/events?key=AIzaSyAtbPQBk1DDAWgBAs07k3f7QKhtPa434-o',
+                        type:'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            "end": 
+                          {
+                            "dateTime": endtime
+                          },
+                            "start": 
+                          {
+                            "dateTime": starttime
+                          }
+                        }),
+                        
+                    success:function(){//TODO what does this do?
+                    }
+
+                    
+                    });
+                    */
+                    
+                    //third ajax to freebusy the mastercalendar
+                    $.ajax({
+                        url:'https://www.googleapis.com/calendar/v3/freeBusy?key=AIzaSyAtbPQBk1DDAWgBAs07k3f7QKhtPa434-o',
+                        type:'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                        "timeMin": sdatestring,
+                        "timeMax": edatestring,
+                        "timeZone":"EST",
+                        //send master calendar id 
+                        "items": [{"id": mastercalendar}]
+                        }),
+                                                
+                        //now we output the free times
+                        success:function(response,textStatus,jqXHR){
+                            var master = response;
+	                        var masterevents = ["calendars"];
+	                        var j = 0; 
+                            for(var user in master) 
+                            {   
+                                for (var time in master[user])
+                                //these are all busy times stored in sequence of user calendar
+                                masterevents[j]= master[user]["busy"];
+                                j++;
+                                
+                            }
+                            console.log(masterevents);
+                            
+                            
+                                /*
+                                //these are all busy times stored in sequence of user calendar
+                                masterevents[j]= user[time]["busy"]["start"];
+                                masterevents[j+1]= user[time]["busy"]["end"];
+                                j+=2;
+                                
+                            }
+                            console.log(masterevents);*/
+                        }
+                                         
+                    });
+                    
+                    
+                }
+            });
+        });
         
-        }
-});
-});
+        
 })
+
+
 </script>
 
 //success of first ajax will loop through all busy events of everyone and call ajax each time to create one event in master calendar
