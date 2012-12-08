@@ -70,7 +70,19 @@ $(document).ready(function() {
     console.log(members);
     
     $('.search_date').click(function() {
-        //read information from dropdown here, because DOM is not loaded previously
+    
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            var code = Request.QueryString["code"];
+        }
+
+        //TODO handle permission response here. exchange authorization code for token
+        //need to understand how to use ajax to do this....
+        /*
+        https://developers.google.com/oauthplayground/?code=4/vnZ4X3Tm4BRZHeTUiHFqMaYpspgT.UgBbFtB8GhsUshQV0ieZDArY_5D2dgI
+        */
+        
+        //read information from dropdown to send first ajax to freebusy all users
         var sday= zeroPad($("#sday").val(),2);
         var smonth = zeroPad($("#smonth").val(),2);
         var syear = $("#syear").val();
@@ -103,63 +115,73 @@ $(document).ready(function() {
         }),
 
         success:function(response,textStatus,jqXHR){
-        // Create an empty array to store times
-        var users = response["calendars"];
-	    var events = [];
-	    var i = 0;
-	    for(var user in users) 
-        {   
-            for (var time in users[user]) 
-            //these are all busy times stored in sequence of user calendar
-            events[i]= users[user]["busy"];
-            i++;
-        }
-        console.log(events);
-        //now add all events to mastercalendar
-        var mastercalendar = <?php echo json_encode($mastercalendar); ?>;
-         /**
-        //create event for each event...stored as an object?
-        for(var calendar in events)
-        {   
-            console.log(calendar);
-            //TODO still need to go one more layer down to objects!
-            //TODO figure out authorization stuff
-            for (var event in [events][calendar])
-            {
-            console.log(event);
-                if (event != '')
+            // Create an empty array to store times
+            var users = response["calendars"];
+	        var events = [];
+	        var i = 0;
+	        for(var user in users) 
+            {   
+                for (var time in users[user]) 
+                //events is an array of arrays, each of which contains an array of objects, each object has "end" "start"
+                events[i]= users[user]["busy"];
+                i++;
+            }
+            console.log(events);
+        
+            //now send second ajax to create a new calendar, TODO with permission.
+            $.ajax({
+                url:'https://www.googleapis.com/calendar/v3/calendars?key=AIzaSyAtbPQBk1DDAWgBAs07k3f7QKhtPa434-o',
+                type:'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(
                 {
-                    var j = 0;
-                    var endtime = [events][event][calendar]["end"];
-                    console.log (endtime);
-                    var starttime = [events][event][calendar]["start"];
-                    j++;
-                    
-                   
-                    //TODO: https://www.googleapis.com/auth/calendar
-                    $.ajax({            
-                        url:'https://www.googleapis.com/calendar/v3/calendars/'+'mastercalendar'+'/events?key=AIzaSyAtbPQBk1DDAWgBAs07k3f7QKhtPa434-o',
-                        type:'POST',
-                        contentType: 'application/json',
-                        data: JSON.stringify({
-                            "end": 
-                          {
-                            "dateTime": endtime
-                          },
-                            "start": 
-                          {
-                            "dateTime": starttime
-                          }
-                        }),
-                        
-                    success:function(){//TODO what does this do?
-                    }
+                    "summary": "mastercalendar"
+                }),
 
+                success:function(response,textStatus,jqXHR){
+                    var mastercalendar = response["id"];//TODO check how to get mastercalendar id
                     
-                    });
-                    */
-                    
-                    //third ajax to freebusy the mastercalendar
+                    //now we should input all nonempty events into this calendar with a loop through events
+                    /*create event for each event...stored as an object in an array of arrays
+                    for(var calendar in events)//looping through user
+                    {   
+                        console.log(calendar);//this prints 0, 1, 2, calendar indexes
+                        //TODO still need to go one more layer down to objects!
+                        for (var event in events[calendar])//this should be looping through objects TODO check for loop syntax
+                        {
+                            console.log(event);//this prints index of events?
+                            if (event != '')//TODO check empty syntax
+                            {
+                                var j = 0;
+                                var endtime = [event]["end"];
+                                //console.log (endtime);
+                                var starttime = [event]["start"];
+                                j++;
+                               
+                                //TODO: https://www.googleapis.com/auth/calendar
+                                $.ajax({            
+                                    url:'https://www.googleapis.com/calendar/v3/calendars/'+'mastercalendar'+'/events?key=AIzaSyAtbPQBk1DDAWgBAs07k3f7QKhtPa434-o',
+                                    type:'POST',
+                                    contentType: 'application/json',
+                                    data: JSON.stringify({
+                                        "end": 
+                                      {
+                                        "dateTime": endtime
+                                      },
+                                        "start": 
+                                      {
+                                        "dateTime": starttime
+                                      }
+                                    }),
+                                    
+                                    success:function(){//TODO can be empty? since it's a loop
+                                    }//end of empty success functions!                                
+                                });
+                            }
+                        }
+                    }*/
+                        
+                    /*fourth ajax to freebusy the mastercalendar
                     $.ajax({
                         url:'https://www.googleapis.com/calendar/v3/freeBusy?key=AIzaSyAtbPQBk1DDAWgBAs07k3f7QKhtPa434-o',
                         type:'POST',
@@ -174,38 +196,34 @@ $(document).ready(function() {
                                                 
                         //now we output the free times
                         success:function(response,textStatus,jqXHR){
-                            var master = response;
-	                        var masterevents = ["calendars"];
-	                        var j = 0; 
+                            var master = response["calendars"];
+                            var masterevents = [];
+                            var j = 0; 
                             for(var user in master) 
                             {   
                                 for (var time in master[user])
                                 //these are all busy times stored in sequence of user calendar
                                 masterevents[j]= master[user]["busy"];
                                 j++;
-                                
                             }
                             console.log(masterevents);
-                            
-                            
-                                /*
-                                //these are all busy times stored in sequence of user calendar
-                                masterevents[j]= user[time]["busy"]["start"];
-                                masterevents[j+1]= user[time]["busy"]["end"];
-                                j+=2;
-                                
-                            }
-                            console.log(masterevents);*/
-                        }
-                                         
+                                  
+                        //these are all busy times stored in sequence of user calendar
+                        masterevents[j]= user[time]["busy"]["start"];
+                        masterevents[j+1]= user[time]["busy"]["end"];
+                        j+=2;
+                        
+                        }//end of success function for fourth ajax            
                     });
+                    ***/
                     
                     
-                }
+                    }//this is the end of the success function of the seocnd ajax
+                });    
+                
+                }//this is the end of the success function of the first ajax
             });
-        });
-        
-        
-})
+        });//end of onclick     
+})//end of dom load
 </script>
 

@@ -44,7 +44,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('.login').click(function() {
-    console.log(hello);
+
         $.ajax({
             url:'https://www.googleapis.com/calendar/v3/calendars?key=AIzaSyAtbPQBk1DDAWgBAs07k3f7QKhtPa434-o',
             type:'POST',
