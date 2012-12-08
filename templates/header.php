@@ -25,7 +25,9 @@
         <div class="container-fluid">
 
             <div id="top">
-                <a href="/"><img alt="C$50 Finance" src="img/wefree.gif"/></a>
+
+                <a href="/"><img alt="C$50 Finance" src="img/WeFree.png"/></a>
+
             </div>
 
             <div id="middle">
