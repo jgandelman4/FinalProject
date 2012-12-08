@@ -58,10 +58,23 @@ populatedropdown("eday", "emonth", "eyear")
 </script>
 
 <script>
-//function to zero pad dates
+//function to zero pad dates, so that date submitted to google is in RFC3339 format
+//taken from http://stackoverflow.com/questions/2998784/how-to-output-integers-with-leading-zeros-in-javascript
 function zeroPad(num, places) {
     var zero = places - num.toString().length + 1;
     return Array(+(zero > 0 && zero)).join("0") + num;
+}
+
+//js function to read querystring to get authentication code from google
+//taken from http://stackoverflow.com/questions/647259/javascript-query-string
+function getQueryString() {
+    var result = {}, queryString = location.search.substring(1),
+      re = /([^&=]+)=([^&]*)/g, m;
+
+    while (m = re.exec(queryString)) {
+    result[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+    }
+    return result;
 }
 
 $(document).ready(function() {
@@ -69,12 +82,8 @@ $(document).ready(function() {
     var members = <?php echo json_encode($members); ?>;
     console.log(members);
     
-    $('.search_date').click(function() {
-    
-        private void Page_Load(object sender, System.EventArgs e)
-        {
-            var code = Request.QueryString["code"];
-        }
+    var authcode = getQueryString()["code"];
+    console.log(authcode);
 
         //TODO handle permission response here. exchange authorization code for token
         //need to understand how to use ajax to do this....
