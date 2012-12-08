@@ -7,7 +7,7 @@
             <input name="password" placeholder="Group Password" type="password"/>
         </div>
         <div class="control-group">
-            <button type="submit" class="btn">Log in to group page!</button>
+            <button type="submit" class="login">Log in to group page!</button>
         </div>
     </fieldset>
 </form>
@@ -15,6 +15,5 @@
     or <a href="registergroup.php">create</a> for a group
     or <a href="register.php">join</a> a group
 </div>
-
 
 

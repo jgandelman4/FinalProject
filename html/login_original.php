@@ -32,8 +32,7 @@
                 $_SESSION["groupkey"] = $row["groupkey"];
                 
                 //redirect to main page
-                redirect("https://accounts.google.com/o/oauth2/auth?scope=https://www.googleapis.com/auth/calendar&redirect_uri=http://ec2-54-234-13-85.compute-1.amazonaws.com&response_type=code&client_id=1079769168876.apps.googleusercontent.com&approval_prompt=force");
-    
+                redirect("/mainpage.php");
             }
         }
 
@@ -43,7 +42,7 @@
     else
     {
         // else render form
-        render("login_form.php", ["title" => "Log In"]);
+        render("login2.php", ["title" => "Log In"]);
     }
 
 ?>
