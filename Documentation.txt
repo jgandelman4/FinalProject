@@ -1,0 +1,25 @@
+Manual
+CS50 Final Project
+Charlotte Chang & Jason Gandelman
+
+How to register as a group
+In order to register as a new group, go to "create a new wefree group". Provide your personal gcal address, as well a group password which you decide to share with
+your group members. If the information is succesfully submitted to MySQL, you will see a pop-up page congratulating you on the success of registering a new
+group and informing you about sharing your group password. Please note that since each gcal can only be affiliated with one group, you may not be able to register 
+new groups if you have already registered with other groups. There is also a link to a visual demonstration on how to share your calendar with WeFree.
+
+How to register as an individual
+Similar to registering as a group, you need to provide a gcal address and a group password to join the group in WeFree. Remember your group password must match the one
+that is already recorded in our database, as determined by the first person who created the group. Additionally, you gcal must share your "freebusy" information
+with WeFree. All you need to do is to change the privacy setting in gCal, there is a link to a visual demonstration on how to do that at the bottom of the
+register page.
+
+How to Log in
+Just provide your gcal address and your group password. If both are correct, you will be directed to the mainpage, where you can check everyone's free time!
+
+How to search time
+In the "WeFree Search" option, you can change date, month and year of the periods you want to search (in EST). The date will be filled in based on the current
+date by default. The search range starts from 00:00:00 of start search day, and ends on 24:00:00 of end search date. If there are any mutual free times that all
+group members share, the results will be listed at the bottom. Conversely, if there is no free time, you will not see any results. If you enter a end time that
+precedes the start time, the website also will not output results.
+
