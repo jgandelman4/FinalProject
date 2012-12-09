@@ -10,7 +10,7 @@
             <a href="instructions.php" onclick="return popitup('instructions.php')">Complete Calendar Sharing Instructions before Registration is Complete</a>
         </div>
         <div class="control-group">
-            <button type="submit" class="btn">Join Existing WeFree Group!</button>
+            <button class="btn btn-info" type="submit">Join Existing WeFree Group!</button>
         </div>
     </fieldset>
 </form>
