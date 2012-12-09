@@ -15,14 +15,14 @@
     $members = query("SELECT member FROM groups WHERE `groupkey` = ?", $_SESSION["groupkey"]);
     
     //assuming we have a masterid column in SQL table TODO don't need anymore?
-    //$mastercalendar = query ("SELECT masterid FROM groups WHERE `groupkey` =?", $_SESSION["groupkey"]);
+    $mastercalendar = query ("SELECT masterid FROM groups WHERE `groupkey` =?", $_SESSION["groupkey"]);
     
     if($members == false)
     {
         apologize("Failed to retrieve group information!");
     }
     //take only the first content in the first row
-    //$mastercalendar = $mastercalendar[0]["masterid"];
+    $mastercalendar = $mastercalendar[0]["masterid"];
     
     //create local array to store just the "member" column from query, which returns an array of rows!
     $memberslist = [];
