@@ -14,6 +14,7 @@
         </div>
     </fieldset>
 </form>
+<p class="text-success">Congrads on Creating a New WeFree Group! Just tell your friends/group members to join your group by sending them the Group Password you just created! Have Fun WeFreeing!</p>
 
 <script language="javascript" type="text/javascript">
 // popitup function from http://www.quirksmode.org/js/popup.html

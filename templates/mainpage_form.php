@@ -26,8 +26,7 @@
 </fieldset>
 </form>
 
-<div id="answer">
-    
+<div id="answer">    
 </div>
 
 
@@ -186,13 +185,8 @@ $(document).ready(function() {
             var end = new Date(edatestring);                        
             //if the beginning point is free, the beginning point is the first free beginning
             var first_busy_start = master_busy[0][0];
-            $("#answer").append("<strong>Your WeFree Results Below:</strong>");
-            $("#answer").append("<br>");
-            //$("#answer").append(test);
-            
-            
-            
-            
+            $("#answer").append("<h2><strong>Your WeFree Results Below:</strong></h2>");
+            $("#answer").append("<br>");     
             
             if (beginning.getTime()< first_busy_start)
             {                
@@ -226,7 +220,7 @@ $(document).ready(function() {
                                 $("#answer").append("WeFree Start Time: ");
                                 $("#answer").append(String(fdate_e));
                                 $("#answer").append("<br>");
-                                $("#answer").append("WeFree Start Time: ");
+                                $("#answer").append("WeFree End Time: ");
                                 $("#answer").append(String(end));   
                                 $("#answer").append("<br>");                             
                             }
