@@ -32,5 +32,5 @@
     }
 
     //now pass members and mastercalendar into view
-    render("mainpage_form.php", ["title" => "MainPage", "members" => $memberslist]);
+    render("mainpage_form.php", ["title" => "MainPage", "members" => $memberslist, "secret" => KEY]);
 ?>

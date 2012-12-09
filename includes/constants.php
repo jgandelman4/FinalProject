@@ -20,5 +20,8 @@
 
     // your database's username
     define("USERNAME", "jharvard");
+    
+    //define our Google Calendar API key
+    define("KEY","AIzaSyAtbPQBk1DDAWgBAs07k3f7QKhtPa434-o");
 
 ?>

@@ -7,7 +7,7 @@
      * Problem Set 7
      * Jason Gandelman, Charlotte Chang
      *
-     * Calculates what will be displayed in register_form.php
+     * Allows users to register with groupkey and gcal
      **********************************************************************/
 
     // configuration
@@ -44,8 +44,5 @@
     {
         // else render form
         render("register_form.php", ["title" => "Register"]);
-    }
-        
-    
-    
+    }    
 ?>
