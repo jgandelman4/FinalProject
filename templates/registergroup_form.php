@@ -10,11 +10,10 @@
             <a href="instructions.php" onclick="return popitup('instructions.php')">Complete Calendar Sharing Instructions before Registration is Complete</a>
         </div>
         <div class="control-group">
-            <button type="submit" class="btn">Create New WeFree Group!</button>
+            <button id="congrats" class="btn btn-info" type="submit">Create New WeFree Group!</button>
         </div>
     </fieldset>
 </form>
-<p class="text-success">Congrads on Creating a New WeFree Group! Just tell your friends/group members to join your group by sending them the Group Password you just created! Have Fun WeFreeing!</p>
 
 <script language="javascript" type="text/javascript">
 // popitup function from http://www.quirksmode.org/js/popup.html
@@ -23,5 +22,11 @@ function popitup(url) {
 	if (window.focus) {newwindow.focus()}
 	return false;
 }
+
+$(document).ready(function() {
+$("#congrats").click(function () { 
+    popitup('congrats.php')
+});
+})
 </script>
 

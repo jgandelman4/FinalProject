@@ -7,7 +7,7 @@
             <input name="password" placeholder="Group Password" type="password"/>
         </div>
         <div class="control-group">
-            <button type="submit" class="btn">Log in to WeFree!</button>
+            <button class="btn btn-info" type="submit">Log in to WeFree!</button>
         </div>
     </fieldset>
 </form>
