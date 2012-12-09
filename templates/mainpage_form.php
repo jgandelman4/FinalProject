@@ -24,10 +24,17 @@
 </tr>
 </tbody>
 </table>
+<button class="btn btn-large btn-large btn-success" type="button" id="search_date">WeFree Search Dates</button>
 </fieldset>
 </form>
 
-<button class="btn btn-large btn-large btn-success" type="button" id="search_date">WeFree Search Dates</button>
+<div id="answer">
+    
+</div>
+
+
+
+
 
 <script type="text/javascript">
 
@@ -175,14 +182,25 @@ $(document).ready(function() {
             
             //Now time to print master free from master busy!!!
             //turn beginning and end points into date objects
+            
             var beginning = new Date(sdatestring);
+            //var test = 5656;
             var end = new Date(edatestring);                        
             //if the beginning point is free, the beginning point is the first free beginning
             var first_busy_start = master_busy[0][0];
+            $("#answer").append("<strong>Your WeFree Results Below:</strong>");
+            $("#answer").append("<br>");
+            //$("#answer").append(test);
+            
+            
+            
+            
+            
             if (beginning.getTime()< first_busy_start)
             {                
-                document.write("WeFree Start Time:");
-                document.write(beginning);
+                $("#answer").append("WeFree Start Time: ");
+                $("#answer").append(String(beginning));
+                $("#answer").append("<br>");
                 for (j in master_busy)
                    {
                         j = parseInt(j);
@@ -196,25 +214,34 @@ $(document).ready(function() {
                             var last_busy_end = master_busy[j][1];
                             if(last_busy_end >= end.getTime() )
                             {
-                                document.write("WeFree End Time:");
-                                document.write(fdate_s);
+                                $("#answer").append("WeFree End Time: ");
+                                $("#answer").append(String(fdate_s));
+                                $("#answer").append("<br>");
+                                $("#answer").append("<br>");
                             }
                             else
                             {
-                                document.write("WeFree End Time:");
-                                document.write(fdate_s);
-                                document.write("WeFree Start Time:");
-                                document.write(fdate_e);
-                                document.write("WeFree Start Time:");
-                                document.write(end);                                
+                                $("#answer").append("WeFree End Time: ");
+                                $("#answer").append(String(fdate_s));
+                                $("#answer").append("<br>");
+                                $("#answer").append("<br>");
+                                $("#answer").append("WeFree Start Time: ");
+                                $("#answer").append(String(fdate_e));
+                                $("#answer").append("<br>");
+                                $("#answer").append("WeFree Start Time: ");
+                                $("#answer").append(String(end));   
+                                $("#answer").append("<br>");                             
                             }
                         }
                         else
                         {
-                            document.write("WeFree End Time:");
-                            document.write(fdate_s);
-                            document.write("WeFree Start Time:");
-                            document.write(fdate_e);
+                            $("#answer").append("WeFree End Time: ");
+                            $("#answer").append(String(fdate_s));
+                            $("#answer").append("<br>");
+                            $("#answer").append("<br>");
+                            $("#answer").append("WeFree Start Time: ");
+                            $("#answer").append(String(fdate_e));
+                            $("#answer").append("<br>");
                         }
                    }                
             }
@@ -228,10 +255,14 @@ $(document).ready(function() {
                         {
                             var fdate_s = new Date(master_busy[j][1]);
                             var fdate_e = new Date(master_busy[j+1][0]);
-                            document.write("WeFree Start Time:");
-                            document.write(fdate_s);
-                            document.write("WeFree End Time:");
-                            document.write(fdate_e);
+                            $("#answer").append("WeFree Start Time: ");
+                            $("#answer").append(String(fdate_s));
+                            $("#answer").append("<br>");
+                            $("#answer").append("WeFree End Time: ");
+                            $("#answer").append(String(fdate_e));
+                            $("#answer").append("<br>");
+                            $("#answer").append("<br>");
+                            
                         }
                    }
             }                                          
