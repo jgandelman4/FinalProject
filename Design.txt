@@ -26,7 +26,15 @@ members share. These two pieces of information are the only necessary ones to pe
 Related to this note, the difference between registergroup and register is that register allows a user to join a pre-existing group in the database, whereas
 registergroup allows a user to create a new group. Although both pages require the same information, they perform different error checks.
 
-
+Potential points of improvement
+1. When a group registers, a pop-up will appear, congratulating the user on successful registration. However, this pop-up will show up any time the Create New 
+Wefree group button is pressed, even if the group failed to register - which the mainpage will show an error of.
+2. When the searching algorithm returns null results, meaning there is no mutual free time for all members, we would like to implement a pop-up to indicate 
+that there were no free times. Also, we could implement a pop-up when a user enters an invalid searching interval.
+3. The Google Calendar API does not return results if the searching range is beyond its limit. We wish to implement similar limitations on the page so that 
+the user does not search for excessively long periods of time.
+4. Lastly, there might be some cornercases that our algorithm does not address. But in all tests performed so far, we have been able to output valid and 
+accurate results. We can also work on enhancing the algorithm to make it more elegant and fast.
 
 
 
