@@ -105,7 +105,7 @@ $(document).ready(function() {
 	        for(var user in users) 
 	        {   
                 var busy = users[user]["busy"];
-                if (busy !== null)
+                if (busy != undefined)
                 {
                     for (var time in busy) 
                     //events is an array of arrays, each of which contains an array of objects, each object has "end" "start"
@@ -133,6 +133,7 @@ $(document).ready(function() {
             var j = 0;
             for (i in events)
             {   
+                //turn i from a string into an int
                 i = parseInt(i);
                 if(events[i+1]!= undefined)
                 {
@@ -159,7 +160,8 @@ $(document).ready(function() {
             
             //determine the order to print free times
             var beginning = new Date(sdatestring);
-            
+            var end = new Date(edatestring);
+                        
             //if the beginning point is free, the beginning point is the first free beginning
             var first_busy_start = master_busy[0][0];
             if (beginning.getTime()< first_busy_start)
@@ -168,13 +170,38 @@ $(document).ready(function() {
                 document.write(beginning);
                 for (j in master_busy)
                    {
+                        j = parseInt(j);
                         var fdate_s = new Date(master_busy[j][0]);
                         var fdate_e = new Date(master_busy[j][1]);
-                        document.write("WeFree End Time:");
-                        document.write(fdate_s);
-                        document.write("WeFree Start Time:");
-                        document.write(fdate_e);
-                   }
+                        
+                        //remember to close the last case
+                        if(master_busy[j+1] == undefined)
+                        {
+                            var last_busy_end = master_busy[j][1];
+                            if(last_busy_end >= end.getTime() )
+                            {
+                                document.write("WeFree End Time:");
+                                document.write(fdate_s);
+                            }
+                            else
+                            {
+                                document.write("WeFree End Time:");
+                                document.write(fdate_s);
+                                document.write("WeFree Start Time:");
+                                document.write(fdate_e);
+                                document.write("WeFree Start Time:");
+                                document.write(end);
+                                
+                            }
+                        }
+                        else
+                        {
+                            document.write("WeFree End Time:");
+                            document.write(fdate_s);
+                            document.write("WeFree Start Time:");
+                            document.write(fdate_e);
+                        }
+                   }                
             }
             //if the beginning point is busy, the first free beginning is the end of the first busy
             else
