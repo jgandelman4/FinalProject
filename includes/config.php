@@ -20,7 +20,7 @@
     // enable sessions
     session_start();
 
-    if (!preg_match("{(?:login|logout|register|registergroup)\.php$}", $_SERVER["PHP_SELF"]))
+    if (!preg_match("{(?:login|logout|register|registergroup|instructions)\.php$}", $_SERVER["PHP_SELF"]))
     {
         if (empty($_SESSION["groupkey"]))
         {
