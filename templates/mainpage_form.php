@@ -174,7 +174,8 @@ $(document).ready(function() {
                         var fdate_s = new Date(master_busy[j][0]);
                         var fdate_e = new Date(master_busy[j][1]);
                         
-                        //remember to close the last case
+                        //if last event ends before midnight, end the current free time and print last bit
+                        //if last event lasts through midnight, just end the current free time
                         if(master_busy[j+1] == undefined)
                         {
                             var last_busy_end = master_busy[j][1];
