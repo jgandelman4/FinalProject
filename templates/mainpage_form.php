@@ -27,11 +27,7 @@
 </fieldset>
 </form>
 
-
-
 <button class="btn btn-large btn-large btn-success" type="button" id="search_date">WeFree Search Dates</button>
-
-
 
 <script type="text/javascript">
 
@@ -90,7 +86,7 @@ $(document).ready(function() {
         var sdatestring = syear + "-" + smonth + "-"+ sday+"T00:00:00-05:00";
         var edatestring = eyear + "-" + emonth + "-"+ eday_formatted+"T00:00:00-05:00";
 
-        //now build object containing ids to send in ajax
+        //now build object containing ids to send to Google in ajax
         var calendar_ids = [];
         for (i in members)
         {
@@ -120,6 +116,7 @@ $(document).ready(function() {
 	        for(var user in users) 
 	        {   
                 var busy = users[user]["busy"];
+                //store only the actual busy times in events
                 if (busy != undefined)
                 {
                     for (var time in busy) 
@@ -127,6 +124,7 @@ $(document).ready(function() {
                     {
                         var start = new Date(busy[time]["start"]);
                         var end = new Date(busy[time]["end"]);
+                        //all starts and ends are stored in seconds - easy to compare and sort
                         events[i]= new Array(start.getTime(), end.getTime());
                         i++;
                     } 
@@ -143,26 +141,28 @@ $(document).ready(function() {
                 return a[0]-b[0];
             });
             
-            //now we compare the events and merge overlapping events
+            //now we compare the end points of events and merge overlapping events
+            //send non-overlapping master busy times to new array
             var master_busy = [];
             var j = 0;
             for (i in events)
             {   
-                //turn i from a string into an int
+                //turn index i from a string into an int
                 i = parseInt(i);
                 if(events[i+1]!= undefined)
                 {
+                    //merge if beginnng of i+1 is earlier than end of i
                     if(events[i][1] >= events[i+1][0])
                     {
                         events[i+1][0]= events[i][0];  
                         if(events[i+1][1]< events[i][1])
                             events[i+1][1]= events[i][1]; 
                     }
+                    //if there is no overlap with previous event, push into masterbusy array
                     else 
                     {
-                          //if there is no overlap with previous event, push into masterbusy array
-                          master_busy[j] = events[i]; 
-                          j++;
+                        master_busy[j] = events[i]; 
+                        j++;
                     }                
                     i++;
                 }
@@ -173,10 +173,10 @@ $(document).ready(function() {
                 }
             }
             
-            //determine the order to print free times
+            //Now time to print master free from master busy!!!
+            //turn beginning and end points into date objects
             var beginning = new Date(sdatestring);
-            var end = new Date(edatestring);
-                        
+            var end = new Date(edatestring);                        
             //if the beginning point is free, the beginning point is the first free beginning
             var first_busy_start = master_busy[0][0];
             if (beginning.getTime()< first_busy_start)
@@ -189,7 +189,7 @@ $(document).ready(function() {
                         var fdate_s = new Date(master_busy[j][0]);
                         var fdate_e = new Date(master_busy[j][1]);
                         
-                        //if last event ends before midnight, end the current free time and print last bit
+                        //if last event ends before midnight, end the current free time and additionally print last free interval
                         //if last event lasts through midnight, just end the current free time
                         if(master_busy[j+1] == undefined)
                         {
@@ -206,8 +206,7 @@ $(document).ready(function() {
                                 document.write("WeFree Start Time:");
                                 document.write(fdate_e);
                                 document.write("WeFree Start Time:");
-                                document.write(end);
-                                
+                                document.write(end);                                
                             }
                         }
                         else
@@ -235,8 +234,7 @@ $(document).ready(function() {
                             document.write(fdate_e);
                         }
                    }
-            }          
-                                
+            }                                          
             }//this is the end of the success function of the first ajax
         });
     });//end of onclick     
