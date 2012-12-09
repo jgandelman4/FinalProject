@@ -4,7 +4,7 @@
             <input autofocus name="gmail" placeholder="Gmail Address" type="text"/>
         </div>
         <div class="control-group">
-            <input autofocus name="groupkey" placeholder="Your Unique Group Password" type="text"/>
+            <input autofocus name="groupkey" placeholder="Your Unique Group Password" type="password"/>
         </div>
         <div class="control-group">
             <a href="instructions.php" onclick="return popitup('instructions.php')">Complete Calendar Sharing Instructions before Registration is Complete</a>
