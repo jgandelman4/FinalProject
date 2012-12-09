@@ -29,6 +29,18 @@
                 <a href="/"><img alt="C$50 Finance" src="img/WeFree.png"/></a>
 
             </div>
-
+            
+            <div class="container-fluid">
+            <table class="table table-hover">   
+                <tr class="info">
+                        <td>Your WeFree Options:</td>
+                        <td><a href="mainpage.php">WeFree Search</a></td>
+                        <td><a href="login.php">Log in With Group</a></td>
+                        <td><a href="register.php">Register Yourself</a></td>
+                        <td><a href="registergroup.php">Create Group</a></td>
+                        <td><a href="logout.php">Log Out</a></td>
+                </tr>
+            </table>
+            </div>
             <div id="middle">
 
