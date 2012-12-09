@@ -1,22 +1,37 @@
-<table>
+<form>
+<fieldset>
+<table class="table table-hover">
+<thead>
 <tr>
-<form id="start">
+    <td></td>
+    <td>Day</td>
+    <td>Month</td>
+    <td>Year</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start Search Day:</td>
 <td><select id="sday"></select></td> 
 <td><select id="smonth"></select></td> 
 <td><select id="syear"></select></td> 
-</form>
 </tr>
 <tr>
-<form id="end">
+<td>End Search Day:</td>
 <td><select id="eday"></select></td> 
 <td><select id="emonth"></select></td> 
 <td><select id="eyear"></select></td> 
-</form>
 </tr>
-<tr>
-<button type="submit" class="search_date">Search Dates</button>
-</tr>
+</tbody>
 </table>
+</fieldset>
+</form>
+
+
+
+<button class="btn btn-large btn-large btn-success" type="button" id="search_date">WeFree Search Dates</button>
+
+
 
 <script type="text/javascript">
 
@@ -63,7 +78,7 @@ $(document).ready(function() {
     //make js understand the php variable passed in from controller
     var members = <?php echo json_encode($members); ?>;
     
-    $('.search_date').click(function () {        
+    $("#search_date").click(function () {        
         //read information from dropdown to send first ajax to freebusy all users
         var sday= zeroPad($("#sday").val(),2);
         var smonth = zeroPad($("#smonth").val(),2);

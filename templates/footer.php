@@ -2,7 +2,7 @@
             </div>
 
             <div id="bottom">
-                Copyright &#169; John Harvard
+                Copyright &#169; Jason Gandelman & Charlotte Chang via CS50
             </div>
 
         </div>
