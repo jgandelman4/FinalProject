@@ -12,8 +12,9 @@
     </fieldset>
 </form>
 <div>
-    or <a href="registergroup.php">create</a> for a group
-    or <a href="register.php">join</a> a group
+    or <a href="registergroup.php">Create A New Group!</a>
+<br>
+    or <a href="register.php">Join A Group!</a>
 </div>
 
 
