@@ -22,15 +22,7 @@
         }
         else if (empty($_POST["groupkey"]))
         {
-            apologize("You must provide a unique group key emailed to you by group creator!");
-        }
-        else if (empty($_POST["groupcalendar"]))
-        {
-            apologize("You must provide a unique master calendar ID for your group!");
-        }
-        else if (empty($_POST["groupname"]))
-        {
-            apologize("You must provide a unique group name!");
+            apologize("You must provide a unique group key!");
         }
         //this is checking to make sure no group has registered with the same group key
         else if(query("SELECT * FROM groups WHERE `groupkey`=?", $_POST["groupkey"]) == true)
@@ -38,7 +30,7 @@
             apologize("This group key has been taken!");
             redirect("/registergroup.php");
         }
-        else if ((query("INSERT INTO groups (name, `groupkey`, member, masterid) VALUES(?, ?, ?, ?)", $_POST["groupname"], $_POST["groupkey"], $_POST["gmail"], $_POST["groupcalendar"]))===false)
+        else if ((query("INSERT INTO groups (`groupkey`, member) VALUES(?, ?)", $_POST["groupkey"], $_POST["gmail"]))===false)
         {
             apologize("We were not able to register you at this time...try again later!");
         }

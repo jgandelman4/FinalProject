@@ -7,10 +7,12 @@
             <input autofocus name="groupkey" placeholder="Your unique group key" type="password"/>
         </div>
         <div class="control-group">
-            <button type="submit" class="btn">Create Group!</button>
+            <button type="submit" class="btn">Join a Group!</button>
         </div>
     </fieldset>
 </form>
 <div>
-    or <a href="login.php">log in</a> if you registered an account previously
+    or <a href="login.php">Log In</a>
+    <br>
+    or <a href="registergroup.php">Create New Group</a> 
 </div>

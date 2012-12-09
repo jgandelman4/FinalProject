@@ -160,15 +160,15 @@ $(document).ready(function() {
             var first_busy_start = master_busy[0][0];
             if (beginning.getTime()< first_busy_start)
             {                
-                document.write("free start time");
+                document.write("WeFree Start Time:");
                 document.write(beginning);
                 for (j in master_busy)
                    {
                         var fdate_s = new Date(master_busy[j][0]);
                         var fdate_e = new Date(master_busy[j][1]);
-                        document.write("free end time");
+                        document.write("WeFree End Time:");
                         document.write(fdate_s);
-                        document.write("free start time:");
+                        document.write("WeFree Start Time:");
                         document.write(fdate_e);
                    }
             }
@@ -182,9 +182,9 @@ $(document).ready(function() {
                         {
                             var fdate_s = new Date(master_busy[j][1]);
                             var fdate_e = new Date(master_busy[j+1][0]);
-                            document.write("free start time");
+                            document.write("WeFree Start Time:");
                             document.write(fdate_s);
-                            document.write("free end time:");
+                            document.write("WeFree End Time:");
                             document.write(fdate_e);
                         }
                    }
