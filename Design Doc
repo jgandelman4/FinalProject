@@ -1,0 +1,14 @@
+CS50 Final Project - WeFree
+Charlotte Chang & Jason Gandelman
+Design File
+
+Overview
+WeFree is a simple and efficient web-based application to allow groups of individuals to find mutual free times for meetings, hangouts and more based on
+their Google calendars. The website registers groups as well as individuals(as affiliates to the group) in its database, queries the Google Calendar API to 
+obtain freebusy information for each user. Then the backend performs a series of calculations to combine all busy events into a master_busy array. Lastly
+we output the free times for all.
+
+Why we chose to use localhost
+Our original ambition was to use the Google Calendar API to create new calendars for each user, and 
+
+
