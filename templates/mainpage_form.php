@@ -1,22 +1,20 @@
 <form>
 <fieldset>
 <table class="table table-hover">
-<thead>
-<tr>
+<tr class="warning">
     <td></td>
     <td>Day</td>
     <td>Month</td>
     <td>Year</td>
 </tr>
-</thead>
 <tbody>
-<tr>
+<tr class="success">
 <td>Start Search Day:</td>
 <td><select id="sday"></select></td> 
 <td><select id="smonth"></select></td> 
 <td><select id="syear"></select></td> 
 </tr>
-<tr>
+<tr  class="error">
 <td>End Search Day:</td>
 <td><select id="eday"></select></td> 
 <td><select id="emonth"></select></td> 

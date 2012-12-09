@@ -7,14 +7,8 @@
             <input name="password" placeholder="Group Password" type="password"/>
         </div>
         <div class="control-group">
-            <button type="submit" class="btn">Log in to group page!</button>
+            <button type="submit" class="btn">Log in to WeFree!</button>
         </div>
     </fieldset>
 </form>
-<div>
-    or <a href="registergroup.php">Create A New Group!</a>
-<br>
-    or <a href="register.php">Join A Group!</a>
-</div>
-
 

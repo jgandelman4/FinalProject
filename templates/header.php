@@ -26,7 +26,7 @@
 
             <div id="top">
 
-                <a href="/"><img alt="C$50 Finance" src="img/WeFree.png"/></a>
+                <a href="/"><img alt="WeFree Logo" src="img/WeFree.png"/></a>
 
             </div>
             
@@ -35,9 +35,9 @@
                 <tr class="info">
                         <td>Your WeFree Options:</td>
                         <td><a href="mainpage.php">WeFree Search</a></td>
-                        <td><a href="login.php">Log in With Group</a></td>
-                        <td><a href="register.php">Register Yourself</a></td>
-                        <td><a href="registergroup.php">Create Group</a></td>
+                        <td><a href="login.php">Log Into WeFree</a></td>
+                        <td><a href="register.php">Join an Existing WeFree Group</a></td>
+                        <td><a href="registergroup.php">Create a New WeFree Group</a></td>
                         <td><a href="logout.php">Log Out</a></td>
                 </tr>
             </table>
